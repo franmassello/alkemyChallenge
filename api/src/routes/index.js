@@ -1,19 +1,79 @@
 const { Router } = require("express");
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
-const axios = require("axios");
 var bcrypt = require("bcryptjs");
-const { combineTableNames } = require("sequelize"); // sequelize/types/lib/utils
-const { noExtendLeft } = require("sequelize"); // /types/lib/operators
 const router = Router();
-const { Usuario } = require("../db");
+const { Usuario, Pelicula, Personaje, Genero } = require("../db.js");
 const jwt = require("jsonwebtoken");
-
 const auth = require("./middleware/auth");
 
-router.get("/disney", auth, (req, res) => {
-  res.status(200).send("Respuesta OK");
-});
+const dataPeliculas = require("../data/peliculas.json");
+const dataPersonajes = require("../data/personajes.json");
+const dataGeneros = require("../data/generos.json");
+
+// #region FUNCIONES AUTOMATICAS
+function crearPeliculasInDb() {
+  dataPeliculas.forEach(async (el) => {
+    try {
+      const verificacion = await Pelicula.findOne({
+        where: { titulo: el.Titulo },
+      });
+      if (!verificacion) {
+        await Pelicula.create({
+          imagen: el.Imagen,
+          titulo: el.Titulo,
+          fecha_creacion: el.FechaDeCreacion,
+          calificacion: el.Calificacion,
+        });
+      }
+    } catch (err) {
+      console.log("error!", err);
+    }
+  });
+}
+
+function crearPersonajesInDb() {
+  dataPersonajes.forEach(async (el) => {
+    try {
+      const verificacion = await Personaje.findOne({
+        where: { nombre: el.Nombre },
+      });
+      if (!verificacion) {
+        await Personaje.create({
+          imagen: el.Imagen,
+          nombre: el.Nombre,
+          edad: el.Edad,
+          peso: el.Peso,
+          historia: el.Historia,
+          peliculas_asociadas: el.PeliculasAsociadas,
+        });
+      }
+    } catch (err) {
+      console.log("error!", err);
+    }
+  });
+}
+
+function crearGenerosInDb() {
+  dataGeneros.forEach(async (el) => {
+    try {
+      const verificacion = await Genero.findOne({
+        where: { nombre: el.Nombre },
+      });
+      if (!verificacion) {
+        await Genero.create({
+          imagen: el.Imagen,
+          nombre: el.Nombre,
+          peliculas_asociadas: el.PeliculasAsociadas,
+        });
+      }
+    } catch (err) {
+      console.log("error!", err);
+    }
+  });
+}
+crearPeliculasInDb();
+crearPersonajesInDb();
+crearGenerosInDb();
+// #endregion
 
 //#region RUTAS DE AUTH
 
@@ -65,7 +125,7 @@ router.post("/auth/register", async (req, res) => {
     encryptedPassword = await bcrypt.hash(password, 10);
 
     // Create token
-    
+
     const user = await Usuario.create({
       nombre: nombre,
       apellido: apellido,

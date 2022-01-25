@@ -1,0 +1,24 @@
+[
+    {
+        "Nombre": "Accion",
+        "Imagen": "https://i.blogs.es/4755f7/accion/1366_2000.jpeg",
+        "PeliculasAsociadas":[
+            "Black Widow",
+            "Capitán America: Civil War"
+        ]
+    },
+    {
+        "Nombre": "Infantil",
+        "Imagen": "https://img.remediosdigitales.com/c32683/pelis-2021/450_1000.jpg",
+        "PeliculasAsociadas":[
+            "Toy Story 3"
+        ]
+    },
+    {
+        "Nombre": "Aventura",
+        "Imagen": "https://www.lifeder.com/wp-content/uploads/2016/07/peliculas-aventuras.jpg",
+        "PeliculasAsociadas":[
+            "Avatar"
+        ]
+    }
+]

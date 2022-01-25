@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
         allowNull: false
     },
     calificacion: { 
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
     },
   });
