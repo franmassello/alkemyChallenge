@@ -1,0 +1,34 @@
+[
+    {
+        "Imagen": "https://static.wikia.nocookie.net/james-camerons-avatar/images/d/dd/Human_Sully.png/revision/latest?cb=20210529040333&path-prefix=es",
+        "Nombre": "Jake Sully",
+        "Edad": "38",
+        "Peso": "89",
+        "Historia": "Jake Sully (nacido el 24 de agosto del 2126) es el protagonista de Avatar. Él es un veterano de la Marina que quedó parapléjico, que después forma un vínculo con la raza Na'vi y que también es uno de los 20 conductores avatar conocidos. Es el sexto Toruk Makto y Olo'eyktan del Clan Omaticaya.",
+        "Peliculas Asociadas": "Avatar"
+    },
+    {
+        "Imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR80vTIhBx_wMxRrq_KEZkn4BDWScFFfQzpFP7-dJBgOYHjr2pi",
+        "Nombre": "Black Widow",
+        "Edad": "36",
+        "Peso": "76",
+        "Historia": "Black Widow (Viuda Negra en España) es una película de superhéroes basada en la personaje de Marvel Comics del mismo nombre. Se trata de la secuela de Captain America: Civil War y la precuela de Avengers: Infinity War. Es la vigésima cuarta entrega del Universo Cinematográfico de Marvel y la primera película de la Fase Cuatro. Se estrenó el 9 de julio en Estados Unidos en cines y en Disney+ con Premier Access simultáneamente.",
+        "Peliculas Asociadas": "Black Widow"
+    },
+    {
+        "Imagen": "https://www.tonica.la/__export/1586802483581/sites/debate/img/2020/04/13/captain_america_portada.jpg_423682103.jpg",
+        "Nombre": "Captain America",
+        "Edad": "Desconocido",
+        "Peso": "Desconocido",
+        "Historia": "El Capitán América, cuyo nombre real es Steven Grant Rogers, es un superhéroe ficticio que aparece en los cómics estadounidenses publicados por Marvel Comics. Creado por los historietistas Joe Simon y Jack Kirby, el personaje apareció por primera vez en Captain America Comics #1 (marzo de 1941) de Timely Comics, predecesor de Marvel Comics.",
+        "Peliculas Asociadas": "Capitán América: Civil War"
+    },
+    {
+        "Imagen": "https://static.wikia.nocookie.net/disneyypixar/images/7/7c/Buzz_Lightyear_KH3.png/revision/latest?cb=20181022022331&path-prefix=es",
+        "Nombre": "Buzz Lightyear",
+        "Edad": "Desconocido",
+        "Peso": "Desconocido",
+        "Historia": "Buzz Lightyear es un personaje principal de la franquicia Toy Story. Es un superhéroe de juguete y una figura de acción en la franquicia. Junto con su amigo, el sheriff Woody, es uno de los dos personajes principales de las cuatro películas de Toy Story.",
+        "Peliculas Asociadas": "Toy Story 3"
+    }
+]
