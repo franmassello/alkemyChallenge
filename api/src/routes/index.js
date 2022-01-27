@@ -5,9 +5,9 @@ const { Usuario, Pelicula, Personaje, Genero } = require("../db.js");
 const jwt = require("jsonwebtoken");
 const auth = require("./middleware/auth");
 
-const dataPeliculas = require("../data/peliculas.json");
-const dataPersonajes = require("../data/personajes.json");
-const dataGeneros = require("../data/generos.json");
+const dataPeliculas = require("../json/peliculas.json");
+const dataPersonajes = require("../json/personajes.json");
+const dataGeneros = require("../json/generos.json");
 
 // #region FUNCIONES AUTOMATICAS
 function crearPeliculasInDb() {
@@ -70,6 +70,7 @@ function crearGenerosInDb() {
     }
   });
 }
+
 crearPeliculasInDb();
 crearPersonajesInDb();
 crearGenerosInDb();
@@ -143,10 +144,34 @@ router.post("/auth/register", async (req, res) => {
 
 //#region RUTAS DE CHARACTERS
 router.post("/characters", async (req, res) => {
-  res.status(200).send("Response OK");
+  try {
+    const { Imagen, Nombre, Edad, Peso, Historia, Peliculas_asociadas } =
+      req.body;
+    if (
+      !(Nombre && Edad && Peso && Historia && Peliculas_asociadas && Imagen)
+    ) {
+      res.status(400).send("Faltan datos!");
+    }
+    const personaje = await Personaje.create({
+      imagen: Imagen,
+      nombre: Nombre,
+      edad: Edad,
+      peso: Peso,
+      historia: Historia,
+      peliculas_asociadas: Peliculas_asociadas,
+    });
+    res.status(201).json(personaje);
+  } catch (error) {
+    console.log(error);
+  }
 });
 router.get("/characters", async (req, res) => {
-  res.status(200).send("Response OK");
+  try {
+    const personajes = await Personaje.findAll();
+    res.status(200).json(personajes);
+  } catch (error) {
+    console.log(error);
+  }
 });
 router.put("/characters", async (req, res) => {
   res.status(200).send("Response OK");
@@ -158,10 +183,29 @@ router.delete("/characters", async (req, res) => {
 
 //#region RUTAS DE MOVIES
 router.post("/movies", async (req, res) => {
-  res.status(200).send("Response OK");
+  try {
+    const { Imagen, Titulo, Fecha_creacion, Calificacion } = req.body;
+    if (!(Titulo && Fecha_creacion && Calificacion && Imagen)) {
+      res.status(400).send("Faltan datos!");
+    }
+    const pelicula = await Pelicula.create({
+      imagen: Imagen,
+      titulo: Titulo,
+      fecha_creacion: Fecha_creacion,
+      calificacion: Calificacion,
+    });
+    res.status(201).json(pelicula);
+  } catch (error) {
+    console.log(error);
+  }
 });
 router.get("/movies", async (req, res) => {
-  res.status(200).send("Response OK");
+  try {
+    const peliculas = await Pelicula.findAll();
+    res.status(200).json(peliculas);
+  } catch (error) {
+    console.log(error);
+  }
 });
 router.put("/movies", async (req, res) => {
   res.status(200).send("Response OK");

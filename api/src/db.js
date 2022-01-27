@@ -41,7 +41,7 @@ async function testDBConection() {
     await sequelize.authenticate();
     console.log(`Conexion con la base de datos establecida! postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/disney` );
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    console.error("No es posible conectarse a la base de datos!:", error);
   }
 }
 testDBConection()
