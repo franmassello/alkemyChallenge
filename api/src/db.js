@@ -36,6 +36,9 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
+console.log(`URL obtenida del archivo .env:  postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/disney` );
+
+
 async function testDBConection() {
   try {
     await sequelize.authenticate();

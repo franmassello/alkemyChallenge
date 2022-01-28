@@ -166,12 +166,52 @@ router.post("/characters", async (req, res) => {
   }
 });
 router.get("/characters", async (req, res) => {
-  try {
+  const name = req.query.name;
+  const age = req.query.age;
+  const movies = req.query.movies;
+  if (name) {
+    const personajeEncontradoPorName = await Personaje.findAll({
+      where: {
+        nombre: name,
+      },
+    });
+    if (personajeEncontradoPorName.length !== 0) {
+      return res.status(201).json(personajeEncontradoPorName);
+    } else {
+      return res.status(202).send("No se encontro el personaje!");
+    }
+  } else if (age) {
+    const personajeEncontradoPorAge = await Personaje.findAll({
+      where: {
+        edad: age,
+      },
+    });
+    if (personajeEncontradoPorAge.length !== 0) {
+      return res.status(201).json(personajeEncontradoPorAge);
+    } else {
+      return res.status(202).send("No se encontro el personaje!");
+    }
+
+  } else if (movies) {
+    console.log('movies', personajeEncontradoPorMovies)
+    const personajeEncontradoPorMovies = await Personaje.findAll({
+      where: {
+        peliculas_asociadas: movies,
+      },
+    });
+    if (personajeEncontradoPorMovies.length !== 0) {
+      return res.status(201).json(personajeEncontradoPorMovies);
+    } else {
+      return res.status(202).send("No se encontro el personaje!");
+    }
+  }
+
+  /* try {
     const personajes = await Personaje.findAll();
     res.status(200).json(personajes);
   } catch (error) {
     console.log(error);
-  }
+  } */
 });
 router.put("/characters", async (req, res) => {
   res.status(200).send("Response OK");
