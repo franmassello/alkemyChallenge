@@ -1,0 +1,3 @@
+-Testear rutas GET y POST de characters y movies *buscar detalles
+-Rutas PUT y DELETE de characters y movies
+-Ruta de email sendGrid

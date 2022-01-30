@@ -191,9 +191,8 @@ router.get("/characters", async (req, res) => {
     } else {
       return res.status(202).send("No se encontro el personaje!");
     }
-
   } else if (movies) {
-    console.log('movies', personajeEncontradoPorMovies)
+    console.log("movies", personajeEncontradoPorMovies);
     const personajeEncontradoPorMovies = await Personaje.findAll({
       where: {
         peliculas_asociadas: movies,
@@ -204,14 +203,10 @@ router.get("/characters", async (req, res) => {
     } else {
       return res.status(202).send("No se encontro el personaje!");
     }
+  } else {
+    const personajeEncontrados = await Personaje.findAll();
+    return res.status(201).json(personajeEncontrados);
   }
-
-  /* try {
-    const personajes = await Personaje.findAll();
-    res.status(200).json(personajes);
-  } catch (error) {
-    console.log(error);
-  } */
 });
 router.put("/characters", async (req, res) => {
   res.status(200).send("Response OK");
@@ -240,11 +235,43 @@ router.post("/movies", async (req, res) => {
   }
 });
 router.get("/movies", async (req, res) => {
-  try {
-    const peliculas = await Pelicula.findAll();
-    res.status(200).json(peliculas);
-  } catch (error) {
-    console.log(error);
+  const name = req.query.name;
+  const genre = req.query.genre;
+  const order = req.query.order;
+  if (name) {
+    const peliculaEncontradaPorName = await Pelicula.findAll({
+      where: {
+        titulo: name,
+      },
+    });
+    if (peliculaEncontradaPorName.length !== 0) {
+      return res.status(201).json(peliculaEncontradaPorName);
+    } else {
+      return res.status(202).send("No se encontro la pelicula!");
+    }
+  } else if (genre) {
+    const peliculaEncontradaPorGenre = await Pelicula.findAll({
+      where: {
+        genero: genre,
+      },
+    });
+    if (peliculaEncontradaPorGenre.length !== 0) {
+      return res.status(201).json(peliculaEncontradaPorGenre);
+    } else {
+      return res.status(202).send("No se encontro la pelicula!");
+    }
+  } else if (order) {
+    if (order === "asc" || order === "desc") {
+      const peliculasEncontradas = await Pelicula.findAll({
+        order: [["titulo", order]],
+      });
+      return res.status(201).json(peliculasEncontradas);
+    } else {
+      return res.status(202).send("El orden no es valido!");
+    }
+  } else {
+    const peliculasEncontradas = await Pelicula.findAll();
+    return res.status(201).json(peliculasEncontradas);
   }
 });
 router.put("/movies", async (req, res) => {

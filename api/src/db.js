@@ -42,7 +42,7 @@ console.log(`URL obtenida del archivo .env:  postgres://${DB_USER}:${DB_PASSWORD
 async function testDBConection() {
   try {
     await sequelize.authenticate();
-    console.log(`Conexion con la base de datos establecida! postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/disney` );
+    console.log(`Conexion con la base de datos establecida!` );
   } catch (error) {
     console.error("No es posible conectarse a la base de datos!:", error);
   }
