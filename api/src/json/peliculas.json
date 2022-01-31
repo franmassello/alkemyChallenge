@@ -3,24 +3,28 @@
         "Imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Avatar-Logo-avatar.svg/1200px-Avatar-Logo-avatar.svg.png",
         "Titulo": "Avatar",
         "FechaDeCreacion": "2009",
-        "Calificacion": "4.2"
+        "Calificacion": "4.2",
+        "Genero": "Aventura"
     },
     {
         "Imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR80vTIhBx_wMxRrq_KEZkn4BDWScFFfQzpFP7-dJBgOYHjr2pi",
         "Titulo": "Black Widow",
         "FechaDeCreacion": "2021",
-        "Calificacion": "3.5"
+        "Calificacion": "3.5",
+        "Genero": "Accion"
     },
     {
         "Imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE0yy9xxF43XyfX2uaCKHwgEEkyfmyTBkYuX1yVWjnEoAcnXiJ",
         "Titulo": "Capitán América: Civil War",
         "FechaDeCreacion": "2016",
-        "Calificacion": "4.2"
+        "Calificacion": "4.2",
+        "Genero": "Accion"
     },
     {
         "Imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ63Co08Xo67f1MDqM3-tlCh1j_4hUpo7Y4LuA2NXzN6z_mtfQ7",
         "Titulo": "Toy Story 3",
         "FechaDeCreacion": "2010",
-        "Calificacion": "4.5"
+        "Calificacion": "4.5",
+        "Genero": "Infantil"
     }
 ]

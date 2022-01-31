@@ -22,6 +22,7 @@ function crearPeliculasInDb() {
           titulo: el.Titulo,
           fecha_creacion: el.FechaDeCreacion,
           calificacion: el.Calificacion,
+          genero: el.Genero
         });
       }
     } catch (err) {
@@ -37,7 +38,7 @@ function crearPersonajesInDb() {
         where: { nombre: el.Nombre },
       });
       if (!verificacion) {
-        await Personaje.create({
+          await Personaje.create({
           imagen: el.Imagen,
           nombre: el.Nombre,
           edad: el.Edad,

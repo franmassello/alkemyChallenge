@@ -26,5 +26,9 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: false
     },
+    genero: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
   });
 };
