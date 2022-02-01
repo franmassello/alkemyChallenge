@@ -22,7 +22,7 @@ function crearPeliculasInDb() {
           titulo: el.Titulo,
           fecha_creacion: el.FechaDeCreacion,
           calificacion: el.Calificacion,
-          genero: el.Genero
+          genero: el.Genero,
         });
       }
     } catch (err) {
@@ -38,7 +38,7 @@ function crearPersonajesInDb() {
         where: { nombre: el.Nombre },
       });
       if (!verificacion) {
-          await Personaje.create({
+        await Personaje.create({
           imagen: el.Imagen,
           nombre: el.Nombre,
           edad: el.Edad,
@@ -92,7 +92,7 @@ router.post("/auth/login", async (req, res) => {
     });
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign(
-        { user_id: user._id, email },
+        { userid: user.id, email },
         process.env.TOKEN_KEY,
         {
           expiresIn: "2h",
@@ -121,7 +121,7 @@ router.post("/auth/register", async (req, res) => {
       },
     });
     if (busquedaUsuario) {
-      return res.status(409).send("El usuario ya existe!");
+      return res.status(409).send("Email ya registrado!");
     }
 
     encryptedPassword = await bcrypt.hash(password, 10);
@@ -135,6 +135,10 @@ router.post("/auth/register", async (req, res) => {
       password: encryptedPassword,
     });
 
+    const token = jwt.sign({ userid: user.id, email }, process.env.TOKEN_KEY, {
+      expiresIn: "2h",
+    });
+    user.token = token;
     // return new user
     res.status(201).json(user);
   } catch (error) {
@@ -144,7 +148,7 @@ router.post("/auth/register", async (req, res) => {
 // #endregion
 
 //#region RUTAS DE CHARACTERS
-router.post("/characters", async (req, res) => {
+router.post("/characters", auth, async (req, res) => {
   try {
     const { Imagen, Nombre, Edad, Peso, Historia, Peliculas_asociadas } =
       req.body;
@@ -210,18 +214,58 @@ router.get("/characters", async (req, res) => {
   }
 });
 router.put("/characters", async (req, res) => {
-  res.status(200).send("Response OK");
+  try {
+    const { id } = req.body;
+    const { Imagen, Nombre, Edad, Peso, Historia, Peliculas_asociadas } =
+      req.body;
+    const personaje = await Personaje.update(
+      {
+        imagen: Imagen,
+        nombre: Nombre,
+        edad: Edad,
+        peso: Peso,
+        historia: Historia,
+        peliculas_asociadas: Peliculas_asociadas,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+    res.status(201).json(personaje);
+  } catch (error) {
+    console.log(error);
+  }
 });
 router.delete("/characters", async (req, res) => {
-  res.status(200).send("Response OK");
+  try {
+    const id = req.query.id;
+    if (!id) {
+      res.status(400).send("Faltan datos!");
+    }
+    const personaje = await Personaje.findOne({
+      where: {
+        id: id,
+      },
+    });
+    if (!personaje) {
+      res.status(404).send("No se encontro el personaje!");
+    } else if (personaje.peliculas_asociadas.length !== 0) {
+      await personaje.destroy();
+      res.status(204).send("Personaje eliminado!");
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 // #endregion
 
 //#region RUTAS DE MOVIES
 router.post("/movies", async (req, res) => {
   try {
-    const { Imagen, Titulo, Fecha_creacion, Calificacion } = req.body;
-    if (!(Titulo && Fecha_creacion && Calificacion && Imagen)) {
+    const { Imagen, Titulo, Fecha_creacion, Calificacion, Genero } = req.body;
+    if (!(Titulo && Fecha_creacion && Calificacion && Imagen, Genero)) {
       res.status(400).send("Faltan datos!");
     }
     const pelicula = await Pelicula.create({
@@ -229,6 +273,7 @@ router.post("/movies", async (req, res) => {
       titulo: Titulo,
       fecha_creacion: Fecha_creacion,
       calificacion: Calificacion,
+      genero: Genero,
     });
     res.status(201).json(pelicula);
   } catch (error) {
@@ -271,15 +316,60 @@ router.get("/movies", async (req, res) => {
       return res.status(202).send("El orden no es valido!");
     }
   } else {
-    const peliculasEncontradas = await Pelicula.findAll();
+    const peliculasEncontradas = await Pelicula.findAll({
+      include: {
+        model: Personaje,
+        attributes: ["nombre"],
+        through: {
+          attributes: ["peliculas_asociadas"],
+        },
+      },
+    });
     return res.status(201).json(peliculasEncontradas);
   }
 });
 router.put("/movies", async (req, res) => {
-  res.status(200).send("Response OK");
+  try {
+    const { id } = req.body;
+    const { Imagen, Titulo, Fecha_creacion, Calificacion } = req.body;
+    const pelicula = await Pelicula.update(
+      {
+        imagen: Imagen,
+        titulo: Titulo,
+        fecha_creacion: Fecha_creacion,
+        calificacion: Calificacion,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+    res.status(201).json(pelicula);
+  } catch (error) {
+    console.log(error);
+  }
 });
 router.delete("/movies", async (req, res) => {
-  res.status(200).send("Response OK");
+  try {
+    const id = req.query.id;
+    if (!id) {
+      res.status(400).send("Faltan datos!");
+    }
+    const pelicula = await Pelicula.findOne({
+      where: {
+        id: id,
+      },
+    });
+    if (!pelicula) {
+      res.status(404).send("No se encontro la pelicula!");
+    } else {
+      await pelicula.destroy();
+      res.status(204).send("Pelicula eliminada!");
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 //#endregion
 module.exports = router;
