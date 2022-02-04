@@ -5,6 +5,11 @@ const { Usuario, Pelicula, Personaje, Genero } = require("../db.js");
 const jwt = require("jsonwebtoken");
 const auth = require("./middleware/auth");
 
+const emailMethods = require('../utils/userActions.js');
+const registerEmail = emailMethods.registerInitialEmail;
+const loginEmail = emailMethods.loginEmail;
+
+// 
 // #region FUNCIONES AUTOMATICAS
 
 // #endregion
@@ -33,7 +38,9 @@ router.post("/auth/login", async (req, res) => {
       // save user token
       user.token = token;
       // user
+      loginEmail(email, user.nombre);
       return res.status(200).json(user);
+      
     }
     res.status(400).send("Credenciales Invalidas");
   } catch (error) {
@@ -72,7 +79,8 @@ router.post("/auth/register", async (req, res) => {
     });
     user.token = token;
     // return new user
-    res.status(201).json(user);
+    registerEmail(email, user.nombre)
+    res.status(201).json(user)
   } catch (error) {
     console.log(error);
   }
@@ -102,7 +110,7 @@ router.post("/characters", auth, async (req, res) => {
     console.log(error);
   }
 });
-router.get("/characters", async (req, res) => {
+router.get("/characters", auth, async (req, res) => {
   const name = req.query.name;
   const age = req.query.age;
   const movies = req.query.movies;
@@ -145,7 +153,7 @@ router.get("/characters", async (req, res) => {
     return res.status(201).json(personajeEncontrados);
   }
 });
-router.put("/characters", async (req, res) => {
+router.put("/characters", auth, async (req, res) => {
   try {
     const { id } = req.body;
     const { Imagen, Nombre, Edad, Peso, Historia, Peliculas_asociadas } =
@@ -170,7 +178,7 @@ router.put("/characters", async (req, res) => {
     console.log(error);
   }
 });
-router.delete("/characters", async (req, res) => {
+router.delete("/characters", auth, async (req, res) => {
   try {
     const id = req.query.id;
     if (!id) {
@@ -194,7 +202,7 @@ router.delete("/characters", async (req, res) => {
 // #endregion
 
 //#region RUTAS DE MOVIES
-router.post("/movies", async (req, res) => {
+router.post("/movies", auth, async (req, res) => {
   try {
     const { Imagen, Titulo, Fecha_creacion, Calificacion, Genero } = req.body;
     if (!(Titulo && Fecha_creacion && Calificacion && Imagen, Genero)) {
@@ -212,7 +220,7 @@ router.post("/movies", async (req, res) => {
     console.log(error);
   }
 });
-router.get("/movies", async (req, res) => {
+router.get("/movies", auth, async (req, res) => {
   const name = req.query.name;
   const genre = req.query.genre;
   const order = req.query.order;
@@ -278,7 +286,7 @@ router.get("/movies", async (req, res) => {
     }
   }
 });
-router.put("/movies", async (req, res) => {
+router.put("/movies", auth, async (req, res) => {
   try {
     const { id } = req.body;
     const { Imagen, Titulo, Fecha_creacion, Calificacion } = req.body;
@@ -300,7 +308,7 @@ router.put("/movies", async (req, res) => {
     console.log(error);
   }
 });
-router.delete("/movies", async (req, res) => {
+router.delete("/movies", auth, async (req, res) => {
   try {
     const id = req.query.id;
     if (!id) {

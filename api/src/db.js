@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const { create } = require("domain");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+//const sgMail = require('./utils/startEmail')
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/disney`,
@@ -36,18 +37,19 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-console.log(`URL obtenida del archivo .env:  postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/disney` );
-
+console.log(
+  `URL obtenida del archivo .env:  postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/disney`
+);
 
 async function testDBConection() {
   try {
     await sequelize.authenticate();
-    console.log(`Conexion con la base de datos establecida!` );
+    console.log(`Conexion con la base de datos establecida!`);
   } catch (error) {
     console.error("No es posible conectarse a la base de datos!:", error);
   }
 }
-testDBConection()
+testDBConection();
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
