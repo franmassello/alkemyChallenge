@@ -1,8 +1,8 @@
 -Modelos de base de datos: Personaje, Pelicula, Genero, Usuarios
 -Rutas: 
     -Autenticacion: 
-        -POST /login 
         -POST /register 
+        -POST /login 
     -Personajes: 
         -GET /characters con busqueda por query con name, age y movies. 
         -POST /characters por query pasando imagen, nombre, edad, peso, historia y peliculas asociadas. 
@@ -13,3 +13,6 @@
         -POST /movies por query pasando imagen, titulo, fecha_creacion y calificacion.
         -DELETE /movies por query con id de pelicula.
         -PUT /movies por body ingresando el id de la pelicula y los datos a actualizar
+    -Email Service:
+        -Al registrarse manda un Email si es que no existe en la base de datos
+        -Al loguearse manda un Email

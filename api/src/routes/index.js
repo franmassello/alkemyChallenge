@@ -40,7 +40,6 @@ router.post("/auth/login", async (req, res) => {
       // user
       loginEmail(email, user.nombre);
       return res.status(200).json(user);
-      
     }
     res.status(400).send("Credenciales Invalidas");
   } catch (error) {

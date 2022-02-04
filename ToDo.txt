@@ -1,2 +1,0 @@
--Ruta de email sendGrid
--Deploy heroku
