@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const { create } = require("domain");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
-//const sgMail = require('./utils/startEmail')
+//const sgMail = require('./utils/startEmail') CON DESCOMENTAR ESTA LINEA SE ENVIA UN MENSAJE CADA VEZ QUE SE INICIA EL NODE
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/disney`,
