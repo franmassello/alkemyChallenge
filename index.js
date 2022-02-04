@@ -17,17 +17,17 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const server = require('./api/src/app.js');
+const { conn } = require('./api/src/db.js');
 //const chargeTempApiToDb = require('../api/src/routes/index')
 
 
 //#region FUNCIONES AUTOMATICAS 
-const { Usuario, Pelicula, Personaje, Genero } = require("./src/db.js");
+const { Usuario, Pelicula, Personaje, Genero } = require("./api/src/db.js");
 
-const dataPeliculas = require("./src/json/peliculas.json");
-const dataPersonajes = require("./src/json/personajes.json");
-const dataGeneros = require("./src/json/generos.json");
+const dataPeliculas = require("./api/src/json/peliculas.json");
+const dataPersonajes = require("./api/src/json/personajes.json");
+const dataGeneros = require("./api/src/json/generos.json");
 
 function crearPeliculasInDb() {
   dataPeliculas.forEach(async (el) => {
