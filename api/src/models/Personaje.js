@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
         allowNull: false
     },
     peliculas_asociadas: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.STRING,
         allowNull: false
     },
   });

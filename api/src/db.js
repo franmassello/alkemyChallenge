@@ -60,8 +60,8 @@ Personaje.belongsToMany(Pelicula, { through: "personaje_pelicula" });
 Pelicula.belongsToMany(Personaje, { through: "personaje_pelicula" });
 
 Genero.belongsToMany(Pelicula, { through: "genero_pelicula" });
-Pelicula.belongsToMany(Genero, { through: "genero_pelicula" });
 
+// POSIBLE SOLUCION: HACER EN LAS AUTOFUNCIONES QUE SE AGREGUEN LAS RELACIONES, ES DECIR QUE SE HAGA LA RELACION EN AUTOFUNCION
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

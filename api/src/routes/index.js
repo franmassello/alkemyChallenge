@@ -5,76 +5,8 @@ const { Usuario, Pelicula, Personaje, Genero } = require("../db.js");
 const jwt = require("jsonwebtoken");
 const auth = require("./middleware/auth");
 
-const dataPeliculas = require("../json/peliculas.json");
-const dataPersonajes = require("../json/personajes.json");
-const dataGeneros = require("../json/generos.json");
-
 // #region FUNCIONES AUTOMATICAS
-function crearPeliculasInDb() {
-  dataPeliculas.forEach(async (el) => {
-    try {
-      const verificacion = await Pelicula.findOne({
-        where: { titulo: el.Titulo },
-      });
-      if (!verificacion) {
-        await Pelicula.create({
-          imagen: el.Imagen,
-          titulo: el.Titulo,
-          fecha_creacion: el.FechaDeCreacion,
-          calificacion: el.Calificacion,
-          genero: el.Genero,
-        });
-      }
-    } catch (err) {
-      console.log("error!", err);
-    }
-  });
-}
 
-function crearPersonajesInDb() {
-  dataPersonajes.forEach(async (el) => {
-    try {
-      const verificacion = await Personaje.findOne({
-        where: { nombre: el.Nombre },
-      });
-      if (!verificacion) {
-        await Personaje.create({
-          imagen: el.Imagen,
-          nombre: el.Nombre,
-          edad: el.Edad,
-          peso: el.Peso,
-          historia: el.Historia,
-          peliculas_asociadas: el.PeliculasAsociadas,
-        });
-      }
-    } catch (err) {
-      console.log("error!", err);
-    }
-  });
-}
-
-function crearGenerosInDb() {
-  dataGeneros.forEach(async (el) => {
-    try {
-      const verificacion = await Genero.findOne({
-        where: { nombre: el.Nombre },
-      });
-      if (!verificacion) {
-        await Genero.create({
-          imagen: el.Imagen,
-          nombre: el.Nombre,
-          peliculas_asociadas: el.PeliculasAsociadas,
-        });
-      }
-    } catch (err) {
-      console.log("error!", err);
-    }
-  });
-}
-
-crearPeliculasInDb();
-crearPersonajesInDb();
-crearGenerosInDb();
 // #endregion
 
 //#region RUTAS DE AUTH
@@ -316,16 +248,34 @@ router.get("/movies", async (req, res) => {
       return res.status(202).send("El orden no es valido!");
     }
   } else {
-    const peliculasEncontradas = await Pelicula.findAll({
-      include: {
-        model: Personaje,
-        attributes: ["nombre"],
-        through: {
-          attributes: ["peliculas_asociadas"],
-        },
-      },
-    });
-    return res.status(201).json(peliculasEncontradas);
+    try {
+      const peliculasEncontradas = await Pelicula.findAll();
+      var arrayObjetosPeliculas = [];
+
+      for (let i = 0; i < peliculasEncontradas.length; i++) {
+        var nombrePelicula = peliculasEncontradas[i].titulo;
+        var personajesEncontrados = await Personaje.findAll({
+          where: {
+            peliculas_asociadas: nombrePelicula,
+          },
+        });
+        var nuevoObjeto = {
+          id: peliculasEncontradas[i].id,
+          imagen: peliculasEncontradas[i].imagen,
+          titulo: peliculasEncontradas[i].titulo,
+          fecha_creacion: peliculasEncontradas[i].fecha_creacion,
+          calificacion: peliculasEncontradas[i].calificacion,
+          genero: peliculasEncontradas[i].genero,
+          createdAt: peliculasEncontradas[i].createdAt,
+          updatedAt: peliculasEncontradas[i].updatedAt,
+          personajes: personajesEncontrados.map(personaje => personaje.nombre)
+        };
+        arrayObjetosPeliculas[i] = nuevoObjeto;
+      }
+      return res.status(201).json(await arrayObjetosPeliculas);
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
 router.put("/movies", async (req, res) => {

@@ -22,11 +22,89 @@ const { conn } = require('./src/db.js');
 //const chargeTempApiToDb = require('../api/src/routes/index')
 
 
+//#region FUNCIONES AUTOMATICAS 
+const { Usuario, Pelicula, Personaje, Genero } = require("./src/db.js");
+
+const dataPeliculas = require("./src/json/peliculas.json");
+const dataPersonajes = require("./src/json/personajes.json");
+const dataGeneros = require("./src/json/generos.json");
+
+function crearPeliculasInDb() {
+  dataPeliculas.forEach(async (el) => {
+    try {
+      const verificacion = await Pelicula.findOne({
+        where: { titulo: el.Titulo },
+      });
+      if (!verificacion) {
+        await Pelicula.create({
+          imagen: el.Imagen,
+          titulo: el.Titulo,
+          fecha_creacion: el.FechaDeCreacion,
+          calificacion: el.Calificacion,
+          genero: el.Genero,
+        });
+      }
+    } catch (err) {
+      console.log("error!", err);
+    }
+  });
+}
+
+function crearPersonajesInDb() {
+  dataPersonajes.forEach(async (el) => {
+    try {
+      const verificacion = await Personaje.findOne({
+        where: { nombre: el.Nombre },
+      });
+      if (!verificacion) {
+        await Personaje.create({
+          imagen: el.Imagen,
+          nombre: el.Nombre,
+          edad: el.Edad,
+          peso: el.Peso,
+          historia: el.Historia,
+          peliculas_asociadas: el.PeliculasAsociadas,
+        });
+      }
+    } catch (err) {
+      console.log("error!", err);
+    }
+  });
+}
+
+function crearGenerosInDb() {
+  dataGeneros.forEach(async (el) => {
+    try {
+      const verificacion = await Genero.findOne({
+        where: { nombre: el.Nombre },
+      });
+      if (!verificacion) {
+        await Genero.create({
+          imagen: el.Imagen,
+          nombre: el.Nombre,
+          peliculas_asociadas: el.PeliculasAsociadas,
+        });
+      }
+    } catch (err) {
+      console.log("error!", err);
+    }
+  });
+}
+
+function ejecutarFunciones() {
+  console.log('Funciones ejecutadas!')
+  crearPeliculasInDb();
+  crearPersonajesInDb();
+  crearGenerosInDb();
+}
+//#endregion
+
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   //Aca se podria agregar las funciones que crean datos
   server.listen(3000, () => {
-    console.log('%s listening at 3000'); // eslint-disable-line no-console
+    console.log('Localhost listening at 3000'); // eslint-disable-line no-console
+    ejecutarFunciones();
   })/* .catch(err => console.error(err)); */
 });
 // Here the server is starting to listen in port 3001
