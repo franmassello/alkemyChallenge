@@ -1,8 +1,8 @@
 # Modelos de base de datos: Personaje, Pelicula, Genero, Usuarios
 - Rutas: 
     - Autenticacion: 
-        - POST /register 
-        - POST /login 
+        - POST /auth/register recibe por body nombre, apellido, email y password
+        - POST /auth/login recibe por body nombre y password
     - Personajes: 
         - GET /characters con busqueda por query con name, age y movies. 
         - POST /characters por query pasando imagen, nombre, edad, peso, historia y peliculas asociadas. 
