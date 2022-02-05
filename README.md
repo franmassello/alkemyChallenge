@@ -2,7 +2,7 @@
 API REST hecha con NodeJS en la cual se puede obtener, crear, editar, borrar personajes y peliculas de Disney
 
 # Indice
-- Caracteristicas de la API
+- Caracteristicas
 - Lenguajes y librerias usadas
 - Como usar la API
 - Workdone y howTo
@@ -28,7 +28,7 @@ API con autenticacion por token que obtiene datos de archivos JSON y los carga e
 - Crear una base de datos en Postgres llamada disney
 - Crear una cuenta gratuita en SendGrid y obtener una API KEY (Documentacion: https://www.youtube.com/watch?v=s2bzUzHeSVw) 
 - Crear un single sender en SendGrid (poder dar de alta un email para mandar mails. Documentacion: https://docs.sendgrid.com/ui/sending-email/sender-verification) 
-- Crear un archivo .env que contenga: 
+- Crear un archivo .env en el /alkemyChallenge que contenga: 
   -  DB_USER='' 
   -  DB_PASSWORD='' 
   -  DB_HOST=localhost 
