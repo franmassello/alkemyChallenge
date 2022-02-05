@@ -45,5 +45,5 @@ API con autenticacion por token que obtiene datos de archivos JSON y los carga e
 https://documenter.getpostman.com/view/19198278/UVeGr66b
 
 # Workdone 
-- Workdone: Es un archivo en el que iba poniendo lo que iba haciendo
+- Workdone: Es un archivo en el que iba marcando el progreso del proyecyto
 
