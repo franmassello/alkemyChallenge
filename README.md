@@ -5,7 +5,8 @@ API REST hecha con NodeJS en la cual se puede obtener, crear, editar, borrar per
 - Caracteristicas
 - Lenguajes y librerias usadas
 - Como usar la API
-- Workdone y howTo
+- Documentacion API Postman
+- Workdone.md
 
 # Caracteristicas
 API con autenticacion por token que obtiene datos de archivos JSON y los carga en una base de datos al prenderse, despues se pueden realizar requests GET, POST, PUT y DELETE a los distintos modelos de la base de datos. Usé Sequelize como orm para manejar Postgres y para crear los endpoints usé Express. Despues utilicé SendGrid para el sistema de emails cuando nos registramos y logeamos a la API. Para el registro y logueo se usa JWT para usar la API y Bcrypt para encriptar las contraseñas en la base de datos.
@@ -40,7 +41,9 @@ API con autenticacion por token que obtiene datos de archivos JSON y los carga e
 **En EMAIL_SENDER_SENDGRID ingresar el email verificado en SendGrid
 - Hacer npm start
 
-# Workdone y howTo
+# Documentacion API Postman
+https://documenter.getpostman.com/view/19198278/UVeGr66b
+
+# Workdone 
 - Workdone: Es un archivo en el que iba poniendo lo que iba haciendo
-- howTo: Archivo donde hay detalle de como usar las rutas con imagenes
 
