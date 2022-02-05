@@ -16,3 +16,5 @@
     - Email Service:
         - Al registrarse manda un Email si es que no existe en la base de datos
         - Al loguearse manda un Email
+Documentacion API: 
+https://documenter.getpostman.com/view/19198278/UVeGr66b
