@@ -48,23 +48,23 @@ https://documenter.getpostman.com/view/19198278/UVeGr66b
 # Estructura de codigo
 - /alkemyChallenge
   - /src
-    - /json
+    - /json Archivos .json para personajes basicos de la base de datos
       - generos.json
       - peliculas.json
       - personajes.json 
-    - /models
+    - /models Modelos de la base de datos
       - Genero.js
       - Pelicula.js
       - Personaje.js
       - Usuario.js
-    - /routes
-      - /middleware
+    - /routes Todo lo relacionado a los endpoints
+      - /middleware Autenticacion de JWT
         - auth.js
-      - index.js
-    - /utils
-      - autoFunctions.js
-      - startEmail.js
-      - userActions.js 
+      - index.js Todas las rutas y sus acciones
+    - /utils Funciones y mas para modularizar el codigo
+      - autoFunctions.js Funciones que llenan la base de datos a partir de los .json, se ejecutan al iniciar el node
+      - startEmail.js Funcion que envia un email al sender para avisar que se inicio la API
+      - userActions.js Funciones que se ejecutan al registrarse o loguearse
     - app.js
     - db.js
   - /tests
