@@ -6,6 +6,7 @@ API REST hecha con NodeJS en la cual se puede obtener, crear, editar, borrar per
 - Lenguajes y librerias usadas
 - Como usar la API
 - Documentacion API Postman
+- Estructura de codigo
 - Workdone.md
 
 # Caracteristicas
@@ -43,6 +44,37 @@ API con autenticacion por token que obtiene datos de archivos JSON y los carga e
 
 # Documentacion API Postman
 https://documenter.getpostman.com/view/19198278/UVeGr66b
+
+# Estructura de codigo
+- /alkemyChallenge
+  - /src
+    - /json
+      - generos.json
+      - peliculas.json
+      - personajes.json 
+    - /models
+      - Genero.js
+      - Pelicula.js
+      - Personaje.js
+      - Usuario.js
+    - /routes
+      - /middleware
+        - auth.js
+      - index.js
+    - /utils
+      - autoFunctions.js
+      - startEmail.js
+      - userActions.js 
+    - app.js
+    - db.js
+  - /tests
+    - test.spec.js
+  - .gitignore
+  - Challenge Backend.pdf
+  - index.js
+  - package.json
+  - README.md
+  - workDone.md
 
 # Workdone 
 - Workdone: Es un archivo en el que iba marcando el progreso del proyecyto
