@@ -36,9 +36,9 @@ API con autenticacion por token que obtiene datos de archivos JSON y los carga e
   -  TOKEN_KEY='' 
   -  SENDGRID_API_KEY= '' 
   -  EMAIL_SENDER_SENDGRID=''
-**En TOKEN_KEY ingresar una frase random para generar los JWT token ej: llavesecreta
-**En SENDGRID_API_KEY ingresar la key que generamos en SendGrid
-**En EMAIL_SENDER_SENDGRID ingresar el email verificado en SendGrid
+      - En TOKEN_KEY ingresar una frase random para generar los JWT token ej: llavesecreta
+      - En SENDGRID_API_KEY ingresar la key que generamos en SendGrid
+      - En EMAIL_SENDER_SENDGRID ingresar el email verificado en SendGrid
 - Hacer npm start
 
 # Documentacion API Postman
