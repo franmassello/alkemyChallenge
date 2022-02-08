@@ -192,7 +192,7 @@ router.delete("/characters", auth, async (req, res) => {
       res.status(404).send("No se encontro el personaje!");
     } else if (personaje.peliculas_asociadas.length !== 0) {
       await personaje.destroy();
-      res.status(204).send("Personaje eliminado!");
+      res.status(201).json('Personaje Eliminado!');
     }
   } catch (error) {
     console.log(error);
@@ -322,7 +322,7 @@ router.delete("/movies", auth, async (req, res) => {
       res.status(404).send("No se encontro la pelicula!");
     } else {
       await pelicula.destroy();
-      res.status(204).send("Pelicula eliminada!");
+      res.status(201).json('Pelicula Eliminada!');
     }
   } catch (error) {
     console.log(error);
