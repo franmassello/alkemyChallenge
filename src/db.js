@@ -44,7 +44,6 @@ console.log(
 async function testDBConection() {
   try {
     await sequelize.authenticate();
-    console.log(`Conexion con la base de datos establecida!`);
   } catch (error) {
     console.error("No es posible conectarse a la base de datos!:", error);
   }

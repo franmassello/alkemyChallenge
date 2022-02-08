@@ -38,7 +38,7 @@ router.post("/auth/login", async (req, res) => {
       // save user token
       user.token = token;
       // user
-      loginEmail(email, user.nombre);
+      //loginEmail(email, user.nombre);
       return res.status(200).json(user);
     }
     res.status(400).send("Credenciales Invalidas");
@@ -78,7 +78,7 @@ router.post("/auth/register", async (req, res) => {
     });
     user.token = token;
     // return new user
-    registerEmail(email, user.nombre)
+    //registerEmail(email, user.nombre)
     res.status(201).json(user)
   } catch (error) {
     console.log(error);
