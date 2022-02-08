@@ -59,19 +59,19 @@ https://documenter.getpostman.com/view/19198278/UVeGr66b
       - Usuario.js
     - /routes Todo lo relacionado a los endpoints
       - /middleware Autenticacion de JWT
-        - auth.js
+        - auth.js Modulo encargado de verificar el token de autenticacion cada vez que se usa una ruta
       - index.js Todas las rutas y sus acciones
     - /utils Funciones y mas para modularizar el codigo
       - autoFunctions.js Funciones que llenan la base de datos a partir de los .json, se ejecutan al iniciar el node
       - startEmail.js Funcion que envia un email al sender para avisar que se inicio la API
       - userActions.js Funciones que se ejecutan al registrarse o loguearse
-    - app.js
-    - db.js
+    - app.js Inicia el servidor Express
+    - db.js Inicia la conexion Sequelize, se conecta con la base de datos y se realizan las relaciones de los modelos
   - /tests
     - test.spec.js
-  - .gitignore
+  - .gitignore 
   - Challenge Backend.pdf
-  - index.js
+  - index.js Archivo donde se inician los modelos y se ejecutan las funciones automaticas
   - package.json
   - README.md
   - workDone.md
