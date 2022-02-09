@@ -5,6 +5,7 @@ API REST hecha con NodeJS en la cual se puede obtener, crear, editar, borrar per
 - Caracteristicas
 - Lenguajes y librerias usadas
 - Como usar la API
+- Testing
 - Documentacion API Postman
 - Estructura de codigo
 - Workdone.md
@@ -41,6 +42,9 @@ API con autenticacion por token que obtiene datos de archivos JSON y los carga e
       - En SENDGRID_API_KEY ingresar la key que generamos en SendGrid
       - En EMAIL_SENDER_SENDGRID ingresar el email verificado en SendGrid
 - Hacer npm start
+
+# Testing
+Hacer npm test para correr el test que verifica que las rutas anden
 
 # Documentacion API Postman
 https://documenter.getpostman.com/view/19198278/UVeGr66b
